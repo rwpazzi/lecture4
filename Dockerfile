@@ -1,4 +1,5 @@
-FROM ubuntu:20.04
+# INFR2670: Dockerfile sample for lecture 4
+FROM ubuntu:24.04
 
 # Avoinding tzdata interactive prompt
 ENV DEBIAN_FRONTEND=noninteractive
