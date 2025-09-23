@@ -5,8 +5,8 @@ FROM ubuntu:24.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install Apache 
-RUN apt-get update && \
- apt-get -y install apache2
+RUN apt update && \
+ apt -y install apache2
 
 # Add your own content to the deafult webpage (index.html)
 RUN echo 'This is my INFR2670 webpage running in a container!' > /var/www/html/index.html
