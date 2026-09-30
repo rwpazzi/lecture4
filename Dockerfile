@@ -12,12 +12,11 @@ RUN apt update && \
 RUN echo 'This is my INFR2670 webpage running in a container!' > /var/www/html/index.html
 
 # Apache configuration
-RUN echo '. /etc/apache2/envvars' > /root/run_apache.sh && \
- echo 'mkdir -p /var/run/apache2' >> /root/run_apache.sh && \
- echo 'mkdir -p /var/lock/apache2' >> /root/run_apache.sh && \ 
- echo '/usr/sbin/apache2 -D FOREGROUND' >> /root/run_apache.sh && \ 
- chmod 755 /root/run_apache.sh
+# We need to source the environment variables '. /etc/apache2/envvars'
+# Then we need to create the directories 'mkdir -p /var/run/apache2' and /var/lock/apache2'  
+# We want to run apache in the foreground '/usr/sbin/apache2 -D FOREGROUND' 
+# Then run apache
 
 EXPOSE 80
 
-CMD /root/run_apache.sh
+CMD ["/bin/bash", "-c", "mkdir -p /var/run/apache2 /var/lock/apache2 && . /etc/apache2/envvars && exec /usr/sbin/apache2 -D FOREGROUND"]
